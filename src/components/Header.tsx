@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Home, Menu, X } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { user, userRole } = useAuth();
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -45,22 +48,47 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
-            <Button className="bg-gradient-accent hover:opacity-90 transition-opacity">
-              List Property
-            </Button>
+            
+            <ThemeToggle />
+            
+            {user ? (
+              <>
+                {userRole === 'admin' && (
+                  <Link to="/admin">
+                    <Button variant="outline">Admin Panel</Button>
+                  </Link>
+                )}
+                {(userRole === 'tenant' || userRole === 'admin') && (
+                  <Link to="/tenant">
+                    <Button className="bg-gradient-accent hover:opacity-90 transition-opacity">
+                      My Properties
+                    </Button>
+                  </Link>
+                )}
+              </>
+            ) : (
+              <Link to="/auth">
+                <Button className="bg-gradient-accent hover:opacity-90 transition-opacity">
+                  Get Started
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button
+              className="p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -79,9 +107,29 @@ const Header = () => {
                   {link.name}
                 </Link>
               ))}
-              <Button className="bg-gradient-accent hover:opacity-90 transition-opacity w-full">
-                List Property
-              </Button>
+              
+              {user ? (
+                <>
+                  {userRole === 'admin' && (
+                    <Link to="/admin" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="outline" className="w-full">Admin Panel</Button>
+                    </Link>
+                  )}
+                  {(userRole === 'tenant' || userRole === 'admin') && (
+                    <Link to="/tenant" onClick={() => setIsMenuOpen(false)}>
+                      <Button className="bg-gradient-accent hover:opacity-90 transition-opacity w-full">
+                        My Properties
+                      </Button>
+                    </Link>
+                  )}
+                </>
+              ) : (
+                <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="bg-gradient-accent hover:opacity-90 transition-opacity w-full">
+                    Get Started
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         )}
