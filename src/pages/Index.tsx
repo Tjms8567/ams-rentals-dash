@@ -4,16 +4,31 @@ import PropertyCard from "@/components/PropertyCard";
 import { properties } from "@/data/properties";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Building2, Shield, Clock, MessageCircle } from "lucide-react";
+import { Building2, Shield, Clock, MessageCircle, Home, Users, Heart, KeyRound } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-10">
+        <Home className="absolute top-20 left-10 w-16 h-16 text-primary animate-float" />
+        <Building2 className="absolute top-40 right-20 w-20 h-20 text-accent animate-float" style={{ animationDelay: '1s' }} />
+        <Users className="absolute bottom-60 left-1/4 w-14 h-14 text-secondary animate-float" style={{ animationDelay: '2s' }} />
+        <Heart className="absolute top-1/3 right-1/3 w-12 h-12 text-primary animate-float" style={{ animationDelay: '1.5s' }} />
+        <KeyRound className="absolute bottom-40 right-1/4 w-16 h-16 text-accent animate-float" style={{ animationDelay: '0.5s' }} />
+        <Home className="absolute top-2/3 left-1/3 w-18 h-18 text-secondary animate-float" style={{ animationDelay: '2.5s' }} />
+        <Building2 className="absolute bottom-20 left-20 w-14 h-14 text-primary animate-float" style={{ animationDelay: '3s' }} />
+      </div>
+      
       <Header />
       <Hero />
 
       {/* Properties Section */}
       <section id="properties" className="py-20 relative">
+        <div className="absolute inset-0 pointer-events-none opacity-10">
+          <KeyRound className="absolute top-10 right-10 w-12 h-12 text-accent animate-float" />
+          <Heart className="absolute bottom-20 left-10 w-16 h-16 text-primary animate-float" style={{ animationDelay: '1s' }} />
+        </div>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -41,7 +56,11 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section id="about" className="py-20 bg-card/30 backdrop-blur-sm">
+      <section id="about" className="py-20 bg-card/30 backdrop-blur-sm relative">
+        <div className="absolute inset-0 pointer-events-none opacity-10">
+          <Users className="absolute top-10 left-10 w-14 h-14 text-secondary animate-float" />
+          <Home className="absolute bottom-10 right-10 w-16 h-16 text-accent animate-float" style={{ animationDelay: '1.5s' }} />
+        </div>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -86,7 +105,11 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
+      <section id="contact" className="py-20 relative">
+        <div className="absolute inset-0 pointer-events-none opacity-10">
+          <Heart className="absolute top-20 left-1/4 w-12 h-12 text-primary animate-float" />
+          <Building2 className="absolute bottom-20 right-1/4 w-14 h-14 text-secondary animate-float" style={{ animationDelay: '1s' }} />
+        </div>
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
